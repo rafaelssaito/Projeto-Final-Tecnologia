@@ -1,0 +1,12 @@
+import firebase_admin
+from firebase_admin import credentials, auth
+
+cred = credentials.Certificate("C:/Users/Rafael Saito/Desktop/P2 Tecnologia/serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
+# Criar um usuário teste (caso ainda não tenha um)
+user = auth.create_user(email="usuario_de_teste@email.com", password="senha123")
+
+# Gerar token personalizado
+custom_token = auth.create_custom_token(user.uid)
+print(f"Token JWT de teste: {custom_token.decode()}")  # Exibe o token no terminal
